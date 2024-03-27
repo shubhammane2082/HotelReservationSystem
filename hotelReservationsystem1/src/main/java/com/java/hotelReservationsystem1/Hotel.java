@@ -5,19 +5,12 @@ public class Hotel
 	private String hotelName;
 	private int weekDayprice;
 	private int weekEndprice;
-	private int price;
 	
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
 	
 	@Override
 	public String toString() {
 		return "Hotel [hotelName=" + hotelName + ", weekDayprice=" + weekDayprice + ", weekEndprice=" + weekEndprice
-				+ ", price=" + price + "]";
+				+ "]";
 	}
 	public String getHotelName() {
 		return hotelName;
@@ -37,4 +30,8 @@ public class Hotel
 	public void setWeekEndprice(int weekEndprice) {
 		this.weekEndprice = weekEndprice;
 	}
+	
+	
+	
+	
 }

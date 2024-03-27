@@ -21,9 +21,9 @@ public class HotelReservationTestCase {
 		String HotelName="Lukewood";
 		hotel.setHotelName(HotelName);
 		int price=200;
-		hotel.setPrice(price);
+		hotel.setWeekDayprice(price);
 		assertEquals(HotelName, hotel.getHotelName());
-		assertEquals(price, hotel.getPrice());
+		assertEquals(price, hotel.getWeekDayprice());
 	}
 	
 	//2nd Test case
@@ -36,12 +36,12 @@ public class HotelReservationTestCase {
 		String hotelName1="Lukewoood";
 		int price1=100;
 		hotel1.setHotelName(hotelName1);
-		hotel1.setPrice(price1);
+		hotel1.setWeekDayprice(price1);
 		
 		String hotelName2="David";
 		int price2=200;
 		hotel2.setHotelName(hotelName2);
-		hotel2.setPrice(price2);
+		hotel2.setWeekDayprice(price2);
 		
 		List<Hotel> hotelList=new ArrayList<Hotel>();
 		hotelList.add(hotel1);
@@ -51,10 +51,10 @@ public class HotelReservationTestCase {
 		LocalDate endDate=LocalDate.of(2024, 4, 2);
 		
 		long countDays = ChronoUnit.DAYS.between(startDate, endDate);
-		long expectLowestcost=countDays * hotel1.getPrice();
+		long expectLowestcost=countDays * hotel1.getWeekDayprice();
 		
 		 assertEquals(hotelName1, hotel1.getHotelName());
-		 assertEquals(expectLowestcost, hotel1.getPrice() * countDays);
+		 assertEquals(expectLowestcost, hotel1.getWeekDayprice() * countDays);
 	}
 	
 	@Test
@@ -63,14 +63,52 @@ public class HotelReservationTestCase {
 		String HotelName="Lukewood";
 		int weekDayprice=110;
 		int weekEndprice=90;
-		int price=200;
+		
 		hotel.setHotelName(HotelName);
-		hotel.setPrice(price);
 		hotel.setWeekDayprice(weekDayprice);
 		hotel.setWeekEndprice(weekEndprice);
+		
 		assertEquals(HotelName, hotel.getHotelName());
-		assertEquals(price, hotel.getPrice());
 		assertEquals(weekEndprice, hotel.getWeekEndprice());
 		assertEquals(weekDayprice, hotel.getWeekDayprice());
+	}
+	
+	@Test
+	public void calculateHotelrateforweekEnd() 
+	{
+		LocalDate startDate=LocalDate.of(2000, 8, 20);
+		LocalDate endDate=LocalDate.of(2000, 9, 20);
+		
+		List<Hotel> hotelList = new ArrayList<>();
+		
+		Hotel hotel1=new Hotel();
+		Hotel hotel2=new Hotel();
+		
+		hotel1.setHotelName("Lukewood");
+		hotel1.setWeekDayprice(110);
+		hotel1.setWeekEndprice(90);
+		
+		hotel2.setHotelName("Bridgewood");
+		hotel2.setWeekDayprice(150);
+		hotel2.setWeekEndprice(50);
+		
+		hotelList.add(hotel1);
+		hotelList.add(hotel2);
+		
+		Hotel cheapestHotel = new Hotel();
+	    long lowestCost = Long.MAX_VALUE;
+	    long countDays = ChronoUnit.DAYS.between(startDate, endDate);
+
+	    for (int i = 0; i < hotelList.size(); i++) 
+	    {
+	        Hotel hotel = hotelList.get(i);
+	        long totalCost = countDays * hotel.getWeekDayprice();
+	        if (totalCost < lowestCost) {
+	            lowestCost = totalCost;
+	            cheapestHotel = hotel;
+	        }
+	    }
+	    assertEquals("Lukewood", cheapestHotel.getHotelName());
+	    assertEquals(3410, lowestCost);
 	}
 }
