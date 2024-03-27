@@ -58,7 +58,7 @@ public class HotelMain {
 	    	    	String endDatestr1=sc.next();
 	    	    	LocalDate endDate1=LocalDate.parse(endDatestr1, DateTimeFormatter.ISO_DATE);
 	    	    	
-	    	    	hotelmain.calculateHotelrateforweekDayEnd(startDate1,endDate1,hotelList);
+	    	    	hotelmain.calculateHotelrateforweekEnd(startDate1,endDate1,hotelList);
 	    	    	break;
 	    	    default :
 	    	    	System.out.println("Invalid Choice...");
@@ -66,7 +66,7 @@ public class HotelMain {
 	    	 }
 	     }while(choice!=0);
 	}
-	private void calculateHotelrateforweekDayEnd(LocalDate startDate, LocalDate endDate, List<Hotel> hotelList) 
+	private void calculateHotelrateforweekEnd(LocalDate startDate, LocalDate endDate, List<Hotel> hotelList) 
 	{
 		Hotel cheapestHotel=new Hotel();
 		long countBydays=ChronoUnit.DAYS.between(startDate, endDate);
@@ -127,6 +127,10 @@ public class HotelMain {
 		System.out.println("Enter the price for week End is : ");
 		int weekEndprice=sc.nextInt();
 		hotel.setWeekEndprice(weekEndprice);
+		
+		System.out.println("Enter the rating for hotel : ");
+		double rating=sc.nextDouble();
+		hotel.setHotel_rating(rating);
 		
 		hotelList.add(hotel);
 		System.out.println(hotelList);

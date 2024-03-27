@@ -57,6 +57,7 @@ public class HotelReservationTestCase {
 		 assertEquals(expectLowestcost, hotel1.getWeekDayprice() * countDays);
 	}
 	
+	//3rd Test case
 	@Test
 	public void AddWeekPricesTestCase() 
 	{	
@@ -73,8 +74,9 @@ public class HotelReservationTestCase {
 		assertEquals(weekDayprice, hotel.getWeekDayprice());
 	}
 	
+	//4th Test case
 	@Test
-	public void calculateHotelrateforweekEnd() 
+	public void calculateHotelrateforweekEndTestcase() 
 	{
 		LocalDate startDate=LocalDate.of(2000, 8, 20);
 		LocalDate endDate=LocalDate.of(2000, 9, 20);
@@ -111,4 +113,22 @@ public class HotelReservationTestCase {
 	    assertEquals("Lukewood", cheapestHotel.getHotelName());
 	    assertEquals(3410, lowestCost);
 	}
+	
+	@Test
+	public void addRatingtestcase() 
+	{
+		String HotelName1="Lukewood";
+		int weekDayprice1=110;
+		int weekEndprice1=90;
+		double hotelRating1=3.0;
+		
+		hotel.setHotelName(HotelName1);
+		hotel.setWeekDayprice(weekDayprice1);
+		hotel.setWeekEndprice(weekEndprice1);
+		hotel.setHotel_rating(hotelRating1);
+	}
+	
+	
+	
+	
 }
