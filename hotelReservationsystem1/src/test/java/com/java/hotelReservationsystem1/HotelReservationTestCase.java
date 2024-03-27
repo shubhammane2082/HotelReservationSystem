@@ -14,11 +14,11 @@ import junit.framework.Assert;
 public class HotelReservationTestCase {
 	Hotel hotel=new Hotel();
 	HotelMain hotelmain=new HotelMain();
-	
+	//1 test case
 	@Test
 	public void AddHotelTestCase() 
 	{	
-		String HotelName="vikas";
+		String HotelName="Lukewood";
 		hotel.setHotelName(HotelName);
 		int price=200;
 		hotel.setPrice(price);
@@ -26,6 +26,7 @@ public class HotelReservationTestCase {
 		assertEquals(price, hotel.getPrice());
 	}
 	
+	//2nd Test case
 	@Test
 	public void calculateHotelrateTestCase() 
 	{
@@ -51,10 +52,25 @@ public class HotelReservationTestCase {
 		
 		long countDays = ChronoUnit.DAYS.between(startDate, endDate);
 		long expectLowestcost=countDays * hotel1.getPrice();
-		 
-//		hotelmain.calculateHotelrate(startDate, endDate, hotelList);
 		
 		 assertEquals(hotelName1, hotel1.getHotelName());
 		 assertEquals(expectLowestcost, hotel1.getPrice() * countDays);
+	}
+	
+	@Test
+	public void AddWeekPricesTestCase() 
+	{	
+		String HotelName="Lukewood";
+		int weekDayprice=110;
+		int weekEndprice=90;
+		int price=200;
+		hotel.setHotelName(HotelName);
+		hotel.setPrice(price);
+		hotel.setWeekDayprice(weekDayprice);
+		hotel.setWeekEndprice(weekEndprice);
+		assertEquals(HotelName, hotel.getHotelName());
+		assertEquals(price, hotel.getPrice());
+		assertEquals(weekEndprice, hotel.getWeekEndprice());
+		assertEquals(weekDayprice, hotel.getWeekDayprice());
 	}
 }

@@ -58,7 +58,6 @@ public class HotelMain {
 	    Hotel cheapestHotel = hotelList.get(0);
 	    long lowestCost = Long.MAX_VALUE;
 	    long countDays = ChronoUnit.DAYS.between(startDate, endDate);
-//	    System.out.println("Days: " + countDays);
 
 	    for (int i = 0; i < hotelList.size(); i++) {
 	        Hotel hotel = hotelList.get(i);
@@ -67,7 +66,6 @@ public class HotelMain {
 	            lowestCost = totalCost;
 	            cheapestHotel = hotel;
 	        }
-//	        System.out.println("Total cost for " + hotel.getHotelName() + ": " + totalCost);
 	    }
 
 	    System.out.println("Cheapest Hotel Name is: " + cheapestHotel.getHotelName() + " and price is: " + lowestCost);
@@ -79,7 +77,9 @@ public class HotelMain {
 		{
 			Hotel hotel=hotelList.get(i);
 			System.out.println("Hotel name is : "+hotel.getHotelName());
-			System.out.println("Hotel price is : "+hotel.getPrice());
+			System.out.println("Hotel Dish price is : "+hotel.getPrice());
+			System.out.println("Hotel price for week Day is : "+hotel.getWeekDayprice());
+			System.out.println("Hotel price for week end is : "+hotel.getWeekEndprice());
 			System.out.println("-----------------------------------------");
 		}
 	}
@@ -90,16 +90,20 @@ public class HotelMain {
 		String hotelName=sc.next();
 		hotel.setHotelName(hotelName);
 		
-		System.out.println("Enter the Dish Price : ");
+		System.out.println("Enter the Dish price : ");
 		int price=sc.nextInt();
-		if(price > 0)
 		hotel.setPrice(price);
-		else {
-			System.out.println("Price is not negative...");
-		     return;
-		}
+		
+		System.out.println("Enter the Price for week Day is : ");
+		int weekDayprice=sc.nextInt();
+		hotel.setWeekDayprice(weekDayprice);
+		
+		System.out.println("Enter the price for week End is : ");
+		int weekEndprice=sc.nextInt();
+		hotel.setWeekEndprice(weekEndprice);
 		
 		hotelList.add(hotel);
+		System.out.println(hotelList);
 		System.out.println("Hotel added Sucessfully...");
 	}
 
