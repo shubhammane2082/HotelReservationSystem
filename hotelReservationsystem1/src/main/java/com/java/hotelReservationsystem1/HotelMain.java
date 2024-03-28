@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +22,8 @@ public class HotelMain {
 	     int choice;
 	     
 	     do {
-	    	 System.out.println("0.Exit 1.add Hotel 2.cheapest hotel rate for time period 3.Hotel List 4.find hotel rates for weekend and weekday \n");
+	    	 System.out.println("0.Exit 1.add Hotel 2.cheapest hotel rate for time period 3.Hotel List 4.find hotel rates for weekend 5.find the hotels with cheapest hotel best rate"
+	    	 		+ " \n");
 	    	 System.out.println("Enter your choice : ");
 	    	 choice=sc.nextInt();
 	    	 
@@ -50,26 +54,61 @@ public class HotelMain {
 	    	    	break;
 	    	    
 	    	    case 4:
-	    	    	System.out.println("Enter the start date in (yyyy-mm-dd) : ");
-	    	    	String startDatestr1=sc.next();
-	    	    	LocalDate startDate1=LocalDate.parse(startDatestr1, DateTimeFormatter.ISO_DATE);
-	    	    	
-	    	    	System.out.println("Enter the end date in (yyyy-mm-dd) : ");
-	    	    	String endDatestr1=sc.next();
-	    	    	LocalDate endDate1=LocalDate.parse(endDatestr1, DateTimeFormatter.ISO_DATE);
-	    	    	
-	    	    	hotelmain.calculateHotelrateforweekEnd(startDate1,endDate1,hotelList);
+	    	    	hotelmain.calculateHotelrateforweekEnd(hotelList);
 	    	    	break;
+	    	    	
+	    	    case 5: 	
+	    	    	calculateHotelwihtbestrating(hotelList);
+	    	    	break;
+	    	    	
+	    	    	
 	    	    default :
 	    	    	System.out.println("Invalid Choice...");
 	    	    	break;
 	    	 }
 	     }while(choice!=0);
 	}
-	private void calculateHotelrateforweekEnd(LocalDate startDate, LocalDate endDate, List<Hotel> hotelList) 
+	
+	private static void calculateHotelwihtbestrating(List<Hotel> hotelList) {
+	    System.out.println("Enter the start date in (yyyy-mm-dd) : ");
+	    String startDatestr2 = sc.next();
+	    LocalDate startDate2 = LocalDate.parse(startDatestr2, DateTimeFormatter.ISO_DATE);
+
+	    System.out.println("Enter the end date in (yyyy-mm-dd) : ");
+	    String endDatestr2 = sc.next();
+	    LocalDate endDate2 = LocalDate.parse(endDatestr2, DateTimeFormatter.ISO_DATE);
+	    
+	    long countDays=ChronoUnit.DAYS.between(startDate2, endDate2);
+	    Hotel cheapestHotel = hotelList.get(0);
+	    Hotel bestRatedHotel = null;
+
+	    for (Hotel hotel : hotelList) {
+	        if (hotel.getHotel_rating() >= 4) {
+	            if (bestRatedHotel==null || hotel.getHotel_rating() > bestRatedHotel.getHotel_rating()) {
+	                bestRatedHotel = hotel;
+	            }
+	        }
+	        if (hotel.getWeekDayprice() < cheapestHotel.getWeekDayprice()) {
+	            cheapestHotel = hotel;
+	        }
+	    }
+
+	    if (bestRatedHotel != null) {
+	        System.out.println("Best rate hotel name is: " + bestRatedHotel.getHotelName() +". Rating: " + bestRatedHotel.getHotel_rating() +". Total Rates: " + bestRatedHotel.getWeekDayprice()*countDays);
+	    }
+	}
+	
+	private void calculateHotelrateforweekEnd(List<Hotel> hotelList) 
 	{
+		System.out.println("Enter the start date in (yyyy-mm-dd) : ");
+    	String startDatestr1=sc.next();
+    	LocalDate startDate1=LocalDate.parse(startDatestr1, DateTimeFormatter.ISO_DATE);
+    	
+    	System.out.println("Enter the end date in (yyyy-mm-dd) : ");
+    	String endDatestr1=sc.next();
+    	LocalDate endDate1=LocalDate.parse(endDatestr1, DateTimeFormatter.ISO_DATE);
 		Hotel cheapestHotel=new Hotel();
-		long countBydays=ChronoUnit.DAYS.between(startDate, endDate);
+		long countBydays=ChronoUnit.DAYS.between(startDate1, endDate1);
 		long lowestCost = Long.MAX_VALUE;
 		
 		for(int i=0;i<hotelList.size();i++)
@@ -89,7 +128,7 @@ public class HotelMain {
 	    Hotel cheapestHotel = hotelList.get(0);
 	    long lowestCost = Long.MAX_VALUE;
 	    long countDays = ChronoUnit.DAYS.between(startDate, endDate);
-
+	    
 	    for (int i = 0; i < hotelList.size(); i++) 
 	    {
 	        Hotel hotel = hotelList.get(i);
@@ -99,7 +138,7 @@ public class HotelMain {
 	            cheapestHotel = hotel;
 	        }
 	    }
-	    System.out.println("Cheapest Hotel Name is: " + cheapestHotel.getHotelName() + " and price is: " + lowestCost);
+	    System.out.println("Cheapest Hotel Name is: " + cheapestHotel.getHotelName() + ".Hotel price is: " + lowestCost +".Hotel rating is : "+cheapestHotel.getHotel_rating());
 	}
 
 	private void getAlllist() 

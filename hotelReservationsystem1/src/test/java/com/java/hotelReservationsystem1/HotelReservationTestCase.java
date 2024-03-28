@@ -114,6 +114,7 @@ public class HotelReservationTestCase {
 	    assertEquals(3410, lowestCost);
 	}
 	
+	//5th Test Case
 	@Test
 	public void addRatingtestcase() 
 	{
@@ -128,7 +129,50 @@ public class HotelReservationTestCase {
 		hotel.setHotel_rating(hotelRating1);
 	}
 	
-	
-	
-	
+	//6th case
+	@SuppressWarnings("deprecation")
+	@Test
+	public void calculateHotelwihtbestratingTestcase() 
+	{
+		Hotel hotel1=new Hotel();
+		Hotel hotel2=new Hotel();
+		List<Hotel> hotelList=new ArrayList<>();
+		
+		hotel1.setHotelName("Lukewood");
+		hotel1.setWeekDayprice(110);
+		hotel1.setWeekEndprice(90);
+		hotel1.setHotel_rating(3.0);
+		
+		hotel2.setHotelName("Bridgewood");
+		hotel2.setWeekDayprice(200);
+		hotel2.setWeekEndprice(50);
+		hotel2.setHotel_rating(4.0);
+		
+		hotelList.add(hotel1);
+		hotelList.add(hotel2);
+		
+		LocalDate startDate=LocalDate.of(2000, 8, 20);
+		LocalDate endDate=LocalDate.of(2000, 9, 20);
+		
+		long countDays=ChronoUnit.DAYS.between(startDate, endDate);
+		Hotel cheapestHotel = hotelList.get(0);
+        Hotel bestRatedHotel = null;
+        
+        for (Hotel hotel : hotelList) 
+        {
+            if (hotel.getHotel_rating() >= 4) {
+                if (bestRatedHotel == null || hotel.getHotel_rating() > bestRatedHotel.getHotel_rating()) {
+                    bestRatedHotel = hotel;
+                }
+            }
+            if (hotel.getWeekDayprice() < cheapestHotel.getWeekDayprice()) {
+                cheapestHotel = hotel;
+            }
+        }
+        
+        assertEquals("Bridgewood", bestRatedHotel.getHotelName());
+        assertEquals(4.0, bestRatedHotel.getHotel_rating(),0.001);
+        assertEquals(200.0 * countDays, bestRatedHotel.getWeekDayprice() * countDays, 0.001);
+
+	}
 }
