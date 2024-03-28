@@ -22,7 +22,7 @@ public class HotelMain {
 	     int choice;
 	     
 	     do {
-	    	 System.out.println("0.Exit 1.add Hotel 2.cheapest hotel rate for time period 3.Hotel List 4.find hotel rates for weekend 5.find the hotels with cheapest hotel best rate"
+	    	 System.out.println("0.Exit 1.add Hotel 2.cheapest hotel rate for time period 3.Hotel List 4.find hotel rates for weekend 5.find the hotels with cheapest hotel best rate 6.find best rated hotels"
 	    	 		+ " \n");
 	    	 System.out.println("Enter your choice : ");
 	    	 choice=sc.nextInt();
@@ -58,9 +58,12 @@ public class HotelMain {
 	    	    	break;
 	    	    	
 	    	    case 5: 	
-	    	    	calculateHotelwihtbestrating(hotelList);
+	    	    	hotelmain.calculateHotelwihtbestrating(hotelList);
 	    	    	break;
 	    	    	
+	    	    case 6:
+	    	    	hotelmain.findBestRatedhotel(hotelList);
+	    	    	break;
 	    	    	
 	    	    default :
 	    	    	System.out.println("Invalid Choice...");
@@ -69,7 +72,28 @@ public class HotelMain {
 	     }while(choice!=0);
 	}
 	
-	private static void calculateHotelwihtbestrating(List<Hotel> hotelList) {
+	public void findBestRatedhotel(List<Hotel> hotelList)
+	{
+		 System.out.println("Enter the start date in (yyyy-mm-dd) : ");
+		 String startDatestr2 = sc.next();
+		 LocalDate startDate2 = LocalDate.parse(startDatestr2, DateTimeFormatter.ISO_DATE);
+
+		  System.out.println("Enter the end date in (yyyy-mm-dd) : ");
+		  String endDatestr2 = sc.next();
+		  LocalDate endDate2 = LocalDate.parse(endDatestr2, DateTimeFormatter.ISO_DATE);
+		
+		  Hotel bestRatedHotel = null;
+		  for (Hotel hotel : hotelList) {
+		     if (bestRatedHotel == null || hotel.getHotel_rating() > bestRatedHotel.getHotel_rating()) {
+		                bestRatedHotel = hotel;
+		            }
+		        }
+
+		        System.out.println("Best-rated hotel for " + startDate2 + " to " + endDate2 + ": " +
+		                bestRatedHotel.getHotelName() + ", Rating: " + bestRatedHotel.getHotel_rating());
+	}
+		
+	private void calculateHotelwihtbestrating(List<Hotel> hotelList) {
 	    System.out.println("Enter the start date in (yyyy-mm-dd) : ");
 	    String startDatestr2 = sc.next();
 	    LocalDate startDate2 = LocalDate.parse(startDatestr2, DateTimeFormatter.ISO_DATE);

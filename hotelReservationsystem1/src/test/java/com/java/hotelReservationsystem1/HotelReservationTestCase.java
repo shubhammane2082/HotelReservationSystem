@@ -130,7 +130,6 @@ public class HotelReservationTestCase {
 	}
 	
 	//6th case
-	@SuppressWarnings("deprecation")
 	@Test
 	public void calculateHotelwihtbestratingTestcase() 
 	{
@@ -173,6 +172,39 @@ public class HotelReservationTestCase {
         assertEquals("Bridgewood", bestRatedHotel.getHotelName());
         assertEquals(4.0, bestRatedHotel.getHotel_rating(),0.001);
         assertEquals(200.0 * countDays, bestRatedHotel.getWeekDayprice() * countDays, 0.001);
-
+     }
+	
+	//7 th Test case
+	@Test
+	public void findBestRateghotelTestcase() 
+	{
+		Hotel hotel1=new Hotel();
+		Hotel hotel2=new Hotel();
+		Hotel hotel3=new Hotel();
+		List<Hotel> hotelList=new ArrayList<>();
+		
+		hotel1.setHotelName("Lukewood");
+		hotel1.setWeekDayprice(110);
+		hotel1.setWeekEndprice(90);
+		hotel1.setHotel_rating(3.0);
+		
+		hotel2.setHotelName("Bridgewood");
+		hotel2.setWeekDayprice(150);
+		hotel2.setWeekEndprice(50);
+		hotel2.setHotel_rating(4.0);
+		
+		hotel3.setHotelName("Riverwood");
+		hotel3.setWeekDayprice(220);
+		hotel3.setWeekEndprice(150);
+		hotel3.setHotel_rating(5.0);
+		
+		hotelList.add(hotel1);
+		hotelList.add(hotel2);
+		
+		assertEquals("Riverwood", hotel3.getHotelName());
+		assertEquals(5.0, hotel3.getHotel_rating(),0.001);
 	}
+	
+	
+	
 }
