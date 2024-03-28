@@ -23,7 +23,7 @@ public class HotelMain {
 	     
 	     do {
 	    	 System.out.println("0.Exit 1.add Hotel 2.cheapest hotel rate for time period 3.Hotel List 4.find hotel rates for weekend "
-	    	 		+ "5.find the hotels with cheapest hotel best rate 6.find best rated hotels"
+	    	 		+ "5.find the hotels with cheapest hotel best rate 6.find best rated hotels 7.find best rated hotel for Reward customer"
 	    	 		+ " \n");
 	    	 System.out.println("Enter your choice : ");
 	    	 choice=sc.nextInt();
@@ -66,6 +66,9 @@ public class HotelMain {
 	    	    	hotelmain.findBestRatedhotel(hotelList);
 	    	    	break;
 	    	    	
+	    	    case 7 :
+	    	    	hotelmain.findcheapestHotelforRewardCustomer();
+	    	    	break;
 	    	    default :
 	    	    	System.out.println("Invalid Choice...");
 	    	    	break;
@@ -73,6 +76,40 @@ public class HotelMain {
 	     }while(choice!=0);
 	}
 	
+	public void findcheapestHotelforRewardCustomer() 
+	{
+		try {
+			 System.out.println("Enter the start date in (yyyy-mm-dd) : ");
+			 String startDatestr2 = sc.next();
+			 LocalDate startDate2 = LocalDate.parse(startDatestr2, DateTimeFormatter.ISO_DATE);
+
+		     System.out.println("Enter the end date in (yyyy-mm-dd) : ");
+			 String endDatestr2 = sc.next();
+			 LocalDate endDate2 = LocalDate.parse(endDatestr2, DateTimeFormatter.ISO_DATE);
+			  
+			  Hotel bestRatedHotel=hotelList.get(0);
+			  double cheapestRate=Double.MAX_VALUE;
+			  long countDays=ChronoUnit.DAYS.between(startDate2, endDate2);
+			  for(int i=0;i<hotelList.size();i++)
+			  {
+				  Hotel hotel=hotelList.get(i);
+				  double totalRate=countDays * hotel.getRewardweekEnd();
+				  
+				  if(hotel.getHotel_rating() >= bestRatedHotel.getHotel_rating() || (hotel.getHotel_rating() == bestRatedHotel.getHotel_rating() && totalRate < cheapestRate))
+				  {
+					  bestRatedHotel=hotel;
+					  cheapestRate=totalRate;
+				  }
+				  
+			  }
+			  System.out.println("Best Rated hotel for : "+startDatestr2+" to "+endDatestr2+"Best Rated Hotel is : "+bestRatedHotel.getHotelName()+" Rating : "+bestRatedHotel.getHotel_rating()+
+					  " and Total Rates is : "+cheapestRate);
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+
 	public void findBestRatedhotel(List<Hotel> hotelList)
 	{
 		 System.out.println("Enter the start date in (yyyy-mm-dd) : ");
@@ -190,7 +227,7 @@ public class HotelMain {
 		
 		System.out.println("Enter the price for Regular week End is : ");
 		int regularweekEndprice=sc.nextInt();
-		hotel.setWeekEndprice(regularweekDayprice);
+		hotel.setWeekEndprice(regularweekEndprice);
 		
 		System.out.println("Enter the rating for hotel : ");
 		double rating=sc.nextDouble();
