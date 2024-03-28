@@ -205,6 +205,31 @@ public class HotelReservationTestCase {
 		assertEquals(5.0, hotel3.getHotel_rating(),0.001);
 	}
 	
+	//8th Test case
+	@Test
+	public void checkRewardweekDayEndTestCase() 
+	{
+		List<Hotel> hotelList=new ArrayList<>();
+		
+		Hotel hotel=new Hotel();
+		
+		hotel.setHotelName("Lukewood");
+		hotel.setWeekDayprice(110);
+		hotel.setWeekEndprice(90);
+		hotel.setHotel_rating(3.0);
+		hotel.setRewardweekDay(80);
+		hotel.setRewardweekEnd(80);
+		
+		hotelList.add(hotel);
+		
+		assertEquals("Lukewood", hotel.getHotelName());
+		assertEquals(110, hotel.getWeekDayprice());
+		assertEquals(90, hotel.getWeekEndprice());
+		assertEquals(3.0, hotel.getHotel_rating(),0.1);
+		assertEquals(80, hotel.getRewardweekDay());
+		assertEquals(80, hotel.getRewardweekEnd());
+	}
+	
 	
 	
 }

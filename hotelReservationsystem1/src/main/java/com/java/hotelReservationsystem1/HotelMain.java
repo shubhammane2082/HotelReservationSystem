@@ -22,7 +22,8 @@ public class HotelMain {
 	     int choice;
 	     
 	     do {
-	    	 System.out.println("0.Exit 1.add Hotel 2.cheapest hotel rate for time period 3.Hotel List 4.find hotel rates for weekend 5.find the hotels with cheapest hotel best rate 6.find best rated hotels"
+	    	 System.out.println("0.Exit 1.add Hotel 2.cheapest hotel rate for time period 3.Hotel List 4.find hotel rates for weekend "
+	    	 		+ "5.find the hotels with cheapest hotel best rate 6.find best rated hotels"
 	    	 		+ " \n");
 	    	 System.out.println("Enter your choice : ");
 	    	 choice=sc.nextInt();
@@ -183,17 +184,25 @@ public class HotelMain {
 		String hotelName=sc.next();
 		hotel.setHotelName(hotelName);
 		
-		System.out.println("Enter the Price for week Day is : ");
-		int weekDayprice=sc.nextInt();
-		hotel.setWeekDayprice(weekDayprice);
+		System.out.println("Enter the Price for Regular week Day is : ");
+		int regularweekDayprice=sc.nextInt();
+		hotel.setWeekDayprice(regularweekDayprice);
 		
-		System.out.println("Enter the price for week End is : ");
-		int weekEndprice=sc.nextInt();
-		hotel.setWeekEndprice(weekEndprice);
+		System.out.println("Enter the price for Regular week End is : ");
+		int regularweekEndprice=sc.nextInt();
+		hotel.setWeekEndprice(regularweekDayprice);
 		
 		System.out.println("Enter the rating for hotel : ");
 		double rating=sc.nextDouble();
 		hotel.setHotel_rating(rating);
+		
+		System.out.println("Enter the Price for Reward weekDay is : ");
+		int rewardweekDayprice=sc.nextInt();
+		hotel.setRewardweekDay(rewardweekDayprice);
+		
+		System.out.println("Enter the price for Regular week End is : ");
+		int rewardweekEndprice=sc.nextInt();
+		hotel.setRewardweekEnd(rewardweekEndprice);
 		
 		hotelList.add(hotel);
 		System.out.println(hotelList);

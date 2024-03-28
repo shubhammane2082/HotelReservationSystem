@@ -6,6 +6,9 @@ public class Hotel
 	private int weekDayprice;
 	private int weekEndprice;
 	private double hotel_rating;
+	private int RewardweekDay;
+	private int RewardweekEnd;
+	
 	public String getHotelName() {
 		return hotelName;
 	}
@@ -30,9 +33,25 @@ public class Hotel
 	public void setHotel_rating(double hotel_rating) {
 		this.hotel_rating = hotel_rating;
 	}
+	public int getRewardweekDay() {
+		return RewardweekDay;
+	}
+	public void setRewardweekDay(int rewardweekDay) {
+		RewardweekDay = rewardweekDay;
+	}
+	public int getRewardweekEnd() {
+		return RewardweekEnd;
+	}
+	public void setRewardweekEnd(int rewardweekEnd) {
+		RewardweekEnd = rewardweekEnd;
+	}
+	
 	@Override
 	public String toString() {
 		return "Hotel [hotelName=" + hotelName + ", weekDayprice=" + weekDayprice + ", weekEndprice=" + weekEndprice
-				+ ", hotel_rating=" + hotel_rating + "]";
+				+ ", hotel_rating=" + hotel_rating + ", RewardweekDay=" + RewardweekDay + ", RewardweekEnd="
+				+ RewardweekEnd + "]";
 	}
 }
+	
+	
