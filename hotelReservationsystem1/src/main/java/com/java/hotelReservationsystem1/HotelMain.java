@@ -18,14 +18,13 @@ public class HotelMain {
 	
 	public static void main(String[] args) throws HotelException 
 	{
-		HotelMain hotelmain=new HotelMain();
 		System.out.println("Welcome to Hotel Reservation System..."+"\n");
 	     int choice;
 	     
 	     do {
 	    	 System.out.println("0.Exit\n1.add Hotel\n2.cheapest hotel rate for time period\n3.Hotel List\n4.find hotel rates for weekend\n"
 	    	 		+ "5.find the hotels with cheapest hotel best rating\n6.find best rating hotels\n7.find best rating hotel for Reward customer\n"
-	    	 		+ "8.find Best Rating for Reward Customer"
+	    	 		+ "8.find Best Rating for Reward Customer\n9.find Best Rating for Regular Customer"
 	    	 		+ " \n");
 	    	 System.out.println("Enter your choice : ");
 	    	 choice=sc.nextInt();
@@ -67,6 +66,10 @@ public class HotelMain {
 	    	    case 8:
 	    	    	 FindcheapestHotelforRewardCustomerUsingStream.FindcheapestHotelforRewardCustomerUsingStream1(sc,hotelList);
 	    	    	 break;
+	    	    	
+	    	    case 9:
+	    	    	FindcheapestHotelforRegularCustomerUsingStream.FindcheapestHotelforRegularCustomerUsingStream1(sc, hotelList);
+	    	    	break;
 	    	    	
 	    	    default :
 	    	    	System.out.println("Invalid Choice...");
