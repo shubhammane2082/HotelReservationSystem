@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -230,7 +231,7 @@ public class HotelReservationTestCase {
 		assertEquals(80, hotel.getRewardweekEnd());
 	}
 	
-	//9th Test Case
+	    //9th Test Case
 		@Test
 		public void findcheapestHotelforRewardCustomerTestcase() 
 		{
@@ -272,12 +273,55 @@ public class HotelReservationTestCase {
 				  }
 				  
 			  }
-			 System.out.println(bestRatedHotel.getHotelName()+" "+bestRatedHotel.getHotel_rating()+" "+cheapestRate); 
 			 assertEquals("Bridgewood", bestRatedHotel.getHotelName());
 			 assertEquals(4.0, bestRatedHotel.getHotel_rating(),0.1);
 			 assertEquals(40.0,cheapestRate,0.1);
 		}
-	
-	
-	
+		
+		//10th Test case
+		@Test
+		public void FindcheapestHotelforRewardCustomerUsingStreamTestCase()
+		{
+			LocalDate startDate = LocalDate.of(2020, 9, 11);
+	        LocalDate endDate = LocalDate.of(2020, 9, 12);
+	        
+	        Hotel hotel1=new Hotel();
+			Hotel hotel2=new Hotel();
+			List<Hotel> hotelList=new ArrayList<>();
+			
+			hotel1.setHotelName("Lukewood");
+			hotel1.setWeekDayprice(110);
+			hotel1.setWeekEndprice(90);
+			hotel1.setHotel_rating(3.0);
+			hotel1.setRewardweekEnd(80);
+			
+			hotel2.setHotelName("Bridgewood");
+			hotel2.setWeekDayprice(150);
+			hotel2.setWeekEndprice(50);
+			hotel2.setHotel_rating(4.0);
+			hotel2.setRewardweekEnd(40);
+			
+			hotelList.add(hotel1);
+			hotelList.add(hotel2);
+			
+			long countBydays=ChronoUnit.DAYS.between(startDate, endDate);
+			
+			Optional<Hotel> bestratedHotel = hotelList.stream().reduce((h1,h2)-> 
+			{
+				double totalRate1=hotelList.stream().mapToDouble(hotel3 -> countBydays * h1.getRewardweekEnd()).sum();
+				double totalRate2=hotelList.stream().mapToDouble(hotel -> countBydays * h2.getRewardweekEnd()).sum();
+				
+				if(h1.getHotel_rating() >= h2.getHotel_rating() || (h1.getHotel_rating() == h2.getHotel_rating() && totalRate1<totalRate2))
+					return h1;
+				else
+					return h2;
+			});
+			
+			bestratedHotel.ifPresent(h1 -> {
+				double cheapestHotel=countBydays * h1.getRewardweekEnd();
+				assertEquals("Bridgewood", h1.getHotelName());
+				assertEquals(4.0, h1.getHotel_rating(),0.01);
+				assertEquals(40.0, cheapestHotel,0.1);
+			});
+		}
 }
